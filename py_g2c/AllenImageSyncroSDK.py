@@ -17,7 +17,8 @@ class AllenImageSyncroSDK(object):
         #returns section_image_id,section_number,x,y
     def image_to_reference(self,SectionImageId,x,y,session=requests.session()):
         #http://api.brain-map.org/api/v2/image_to_reference/[SectionImage.id].[xml|json]?x=[#]&y=[#]
-        url = self.base_url + 'image_to_reference/%d.json&x=%f,y=%f'%(SectionImageId,x,y)
+        url = self.base_url + 'image_to_reference/%d.json?x=%f&y=%f'%(SectionImageId,x,y)
+        print 'url',url
         return self.process_simple_url_request(url,session)    
         #return x,y,z
   
