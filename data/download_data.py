@@ -10,14 +10,9 @@ import os
 section_names = pd.read_csv('./nature13186-s2.csv')
 all_gene_acronyms = list(section_names['Acronym'])
 
-# ### Get acronyms of genes in nervous system development classification
-gene_acronyms = []
-for infile in glob.glob('./nervous_system_developmental_genes_queries/nervous_system_developmen_querv*.xml'):
-    tree = ET.parse(infile)
-    root = tree.getroot()
-    for acronym in root.findall('.//acronym'):
-        gene_acronyms.append(acronym.text)
-assert len(gene_acronyms) == len(set(gene_acronyms))
+genes_csv = pd.read_csv('../../all_developing_mouse_brain_genes.csv')
+gene_ids = genes_csv['id']
+gene_acronyms = genes_csv['gene_symbol']
 
 # ### Use allan brain atlas "API" to query all relevant gene expression experiments and extract their corresponding SectionDataSet IDs
 exp_ids = []
@@ -35,8 +30,8 @@ for i, acr in enumerate(gene_acronyms):
         assert len(IDs) <= 1
         exp_ids.append(IDs[0].text)
     print('Done with extracting SectionDataSet id for gene expression data of {} ({}/{})'.format(acr, i+1, len(gene_acronyms)))
-assert len(exp_ids) == len(set(exp_ids))
-print('Experiment IDs ({}):\n'.format(len(exp_ids)), exp_ids)
+print("len(exp_ids) = {}, len(set(exp_ids)) = {}".format(len(exp_ids), len(set(exp_ids))))
+print('Set of experiment IDs ({}):\n'.format(len(set(exp_ids))), set(exp_ids))
 
 # ### Download data sets for each SectionDataSet ID
 data_dir = './gene_expression_data/'
