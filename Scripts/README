@@ -1,0 +1,16 @@
+Contains scripts for converting gene expression from developmental stages to adult ccfv2 in v3 space, then calculating the mean intensity of gene expression in each region defined in Oh et al (2014)
+
+This folder contains the following scripts:
+
+1. extract_gene_data.sh ### unzips all gene data
+2. convert_*_*expression.m ### converts mhd gene expression data to nii format
+3. Mirror_atlases_P* ### mirrors templates for incomplete developmental stages along the midine to generate whole brain templates
+4. Reference_atlas_registration_cluster.sh ### generates warps between developmental stages
+5. Region_synchronization_Tim_Oh.m ### harmonizes the regions from the publicly available ccvf2 2011 annotation in ccfv3 template space with regions used in Oh et al (2014)
+6. Intensity_analysis.m ### calculates mean gene expression for each region defined by Oh et al.
+
+Additional scripts:
+
+Reshape_sagittal_expression ### reshapes sagittal expression to cover as much of the template brain as possible (sagittal expression incompletely covers half of one hemisphere.
+
+
